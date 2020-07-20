@@ -10,15 +10,13 @@ import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.koin.test.KoinTest
 
 @RunWith(JUnit4::class)
-class FlicksRepositoryImplTest : KoinTest {
+class FlicksRepositoryImplTest  {
 
     @MockK
     lateinit var apiService: FlickrApiService
@@ -46,9 +44,24 @@ class FlicksRepositoryImplTest : KoinTest {
 
         assertEquals(list.size, 2)
         assert (list[0] is PhotoItem)
+        assert (list[1] is PhotoItem)
+
         assertEquals ("Title1", list[0].title)
         assertEquals("Title2", list[1].title)
+
+        val thumbNailUrl1 = "https://farm23.staticflickr.com/server/aaa_secret_m.jpg"
+        val thumbNailUrl2 = "https://farm45.staticflickr.com/server/bbb_secret_m.jpg"
+
+        val photoUrl1 = "https://farm23.staticflickr.com/server/aaa_secret_b.png"
+        val photoUrl2 = "https://farm45.staticflickr.com/server/bbb_secret_b.png"
+
+
+        assertEquals (thumbNailUrl1, list[0].thumbnailUrl)
+        assertEquals(thumbNailUrl2, list[1].thumbnailUrl)
+        assertEquals (photoUrl1, list[0].photoUrl)
+        assertEquals(photoUrl2, list[1].photoUrl)
     }
+
 
 
 }

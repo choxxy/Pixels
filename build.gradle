@@ -12,6 +12,7 @@ buildscript {
         flexboxVersion= "2.0.1"
         kotlinCoreVersion = "1.3.0"
         coroutineVersion = "1.3.4"
+        kotlinExtensions = "2.2.0"
     }
 
     repositories {

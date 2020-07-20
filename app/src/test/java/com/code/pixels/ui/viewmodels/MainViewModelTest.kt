@@ -1,7 +1,6 @@
 package com.code.pixels.ui.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.code.pixels.data.api.FlickrApiService
 import com.code.pixels.data.model.PhotoItem
 import com.code.pixels.data.repository.FlicksRepository
 import com.jraska.livedata.test
@@ -29,7 +28,6 @@ class MainViewModelTest  {
 
     lateinit var mainViewModel: MainViewModel
 
-
     @Before
     fun setup() {
         MockKAnnotations.init(this)
@@ -47,16 +45,23 @@ class MainViewModelTest  {
     fun testFetchRepositories_Positive() {
 
         coEvery {  repository.searchPhotos("earth")  } returns
-                        constructVideoModel()
+                constructPhotoItems()
 
         mainViewModel.searchResponse.test().assertHasValue().map{ it[0].title}.assertValue("photo1")
+        mainViewModel.searchResponse.test().assertHasValue().map{ it[0].thumbnailUrl}.assertValue("https://photo1.thumbnail.jpg")
+        mainViewModel.searchResponse.test().assertHasValue().map{ it[0].photoUrl}.assertValue("https://photo1.png")
+
+
+        mainViewModel.searchResponse.test().assertHasValue().map{ it[1].title}.assertValue("photo2")
+        mainViewModel.searchResponse.test().assertHasValue().map{ it[1].thumbnailUrl}.assertValue("https://photo2.thumbnail.jpg")
+        mainViewModel.searchResponse.test().assertHasValue().map{ it[1].photoUrl}.assertValue("https://photo2.png")
 
         mainViewModel.search("earth")
 
     }
 
 
-    private fun constructVideoModel(): List<PhotoItem> {
+    private fun constructPhotoItems(): List<PhotoItem> {
         val photoItem1 = PhotoItem(
                 "photo1",
                 "https://photo1.thumbnail.jpg",
