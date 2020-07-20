@@ -47,7 +47,7 @@ class MainViewModelTest  {
     fun testFetchRepositories_Positive() {
 
         coEvery {  repository.searchPhotos("earth")  } returns
-                        constructVideoModel()
+                        constructPhotoItems()
 
         mainViewModel.searchResponse.test().assertHasValue().map{ it[0].title}.assertValue("photo1")
 
@@ -56,7 +56,7 @@ class MainViewModelTest  {
     }
 
 
-    private fun constructVideoModel(): List<PhotoItem> {
+    private fun constructPhotoItems(): List<PhotoItem> {
         val photoItem1 = PhotoItem(
                 "photo1",
                 "https://photo1.thumbnail.jpg",
