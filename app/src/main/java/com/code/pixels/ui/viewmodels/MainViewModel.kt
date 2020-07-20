@@ -15,7 +15,9 @@ class MainViewModel(private val flicksRepository: FlicksRepository) : ViewModel(
         searchString.value = "earth"
     }
 
-    val searchResponse: LiveData<List<PhotoItem>> = Transformations.switchMap(searchString, ::searchPhotos)
+    //discard previous search Livedata
+    val searchResponse: LiveData<List<PhotoItem>> =
+            Transformations.switchMap(searchString, ::searchPhotos)
 
     private fun searchPhotos(searchTerm: String): LiveData<List<PhotoItem>> {
         viewModelScope.launch{

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class PhotosDto(
         @SerializedName("stat")
-        val stat: String,
+        val stat: String = "",
 
         @SerializedName("perpage")
         val perpage: Int = 0,
@@ -20,7 +20,7 @@ data class PhotosDto(
         val photoDtoList: List<PhotoDto>,
 
         @SerializedName("page")
-        val page: String
+        val page: String = "0"
 ) {
 
     //get PhotoItem from PhotoDto
