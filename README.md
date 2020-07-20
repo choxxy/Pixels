@@ -14,7 +14,6 @@ Install the dependencies and build apk in (Debug environment)
 * Kotlin & Java
 * Coroutines
 * AAC
-* [Android LifeCycle Extension] - Android ViewModel lifecycle aware &LiveData
 * ViewBinding
 * Mockk
 * Koin -  for dependencies injection
