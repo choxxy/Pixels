@@ -32,7 +32,7 @@ data class PhotosDto(
                 continue
 
             val thumbNail = "https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg"
-            val title = photo.title
+            val title = photo.title?: ""
             val fullImage = "https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_b.png"
             val photoItem = PhotoItem(title, thumbNail, fullImage)
             photoItemList.add(photoItem)

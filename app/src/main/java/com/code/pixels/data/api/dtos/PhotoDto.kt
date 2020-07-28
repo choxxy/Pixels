@@ -25,7 +25,7 @@ data class PhotoDto (
     val secret: String,
 
     @SerializedName("title")
-    val title: String,
+    val title: String? = null,
 
     @SerializedName("isfamily")
     val isfamily:Int = 0

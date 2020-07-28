@@ -14,6 +14,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import retrofit2.Response
 
 @RunWith(JUnit4::class)
 class FlicksRepositoryImplTest  {
@@ -33,14 +34,16 @@ class FlicksRepositoryImplTest  {
     @Test
     fun testExecute_Positive() = runBlocking {
 
-        coEvery { apiService.api.search("test") } returns ApiResponse(PhotosDto(photoDtoList = listOf<PhotoDto>(PhotoDto(owner = "a",
+        coEvery { apiService.api.search("test") } returns Response.success(ApiResponse(PhotosDto(photoDtoList = listOf<PhotoDto>(PhotoDto(owner = "a",
                 id = "aaa", secret = "secret", title = "Title1", server = "server", farm = 23
         )
                 , PhotoDto(owner = "b",
                 id = "bbb", secret = "secret", title = "Title2", server = "server", farm = 45
-        ))))
+        )))))
 
-        val list = flicksRepository.searchPhotos("test")
+        val response = flicksRepository.searchPhotos("test")
+
+        val list = response.data!!
 
         assertEquals(list.size, 2)
         assert (list[0] is PhotoItem)
