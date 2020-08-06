@@ -22,8 +22,14 @@ class MainViewModel(private val flicksRepository: FlicksRepository) : ViewModel(
 
     private fun searchPhotos(searchTerm: String): LiveData<Resource<List<PhotoItem>>> {
         viewModelScope.launch{
-            val response = flicksRepository.searchPhotos(searchTerm)
-            apiResponse.value = response
+            val response = kotlin.runCatching { flicksRepository.searchPhotos(searchTerm)  }
+            response.onSuccess {
+                apiResponse.value = Resource.success(it)
+            }
+            response.onFailure {
+                apiResponse.value = Resource.error(it.message.toString(),null)
+            }
+
         }
         return apiResponse
     }

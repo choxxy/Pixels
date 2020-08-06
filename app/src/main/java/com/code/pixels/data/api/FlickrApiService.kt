@@ -13,7 +13,6 @@ class FlickrApiService {
     val api: FlickrApi
         get() {
 
-
             val retrofit: Retrofit = Retrofit.Builder()
                     .baseUrl(FlickrApi.BASE_URL)
                     .client(client)

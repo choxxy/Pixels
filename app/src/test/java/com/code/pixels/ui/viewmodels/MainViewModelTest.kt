@@ -46,7 +46,7 @@ class MainViewModelTest  {
     fun testFetchRepositories_Positive() {
 
         coEvery {  repository.searchPhotos("earth")  } returns
-                Resource.success(constructPhotoItems())
+                constructPhotoItems()
 
         mainViewModel.searchResponse.test().assertHasValue().map{ it!!.data!![0].title}.assertValue("photo1")
         mainViewModel.searchResponse.test().assertHasValue().map{ it!!.data!![0].thumbnailUrl}.assertValue("https://photo1.thumbnail.jpg")

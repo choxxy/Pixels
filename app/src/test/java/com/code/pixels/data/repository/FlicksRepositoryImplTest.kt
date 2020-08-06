@@ -34,16 +34,14 @@ class FlicksRepositoryImplTest  {
     @Test
     fun testExecute_Positive() = runBlocking {
 
-        coEvery { apiService.api.search("test") } returns Response.success(ApiResponse(PhotosDto(photoDtoList = listOf<PhotoDto>(PhotoDto(owner = "a",
+        coEvery { apiService.api.search("test") } returns ApiResponse(PhotosDto(photoDtoList = listOf<PhotoDto>(PhotoDto(owner = "a",
                 id = "aaa", secret = "secret", title = "Title1", server = "server", farm = 23
         )
                 , PhotoDto(owner = "b",
                 id = "bbb", secret = "secret", title = "Title2", server = "server", farm = 45
-        )))))
+        ))))
 
-        val response = flicksRepository.searchPhotos("test")
-
-        val list = response.data!!
+        val list = flicksRepository.searchPhotos("test")
 
         assertEquals(list.size, 2)
         assert (list[0] is PhotoItem)

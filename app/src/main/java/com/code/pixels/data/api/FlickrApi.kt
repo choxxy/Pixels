@@ -9,7 +9,7 @@ interface FlickrApi {
 
 
     @GET("?method=flickr.photos.search")
-    suspend  fun search(@Query("text") query:String): Response<ApiResponse>
+    suspend  fun search(@Query("text") query:String): ApiResponse
 
     companion object {
         const val BASE_URL = "https://www.flickr.com/services/rest/"
